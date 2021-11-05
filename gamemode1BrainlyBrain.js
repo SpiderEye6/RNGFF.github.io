@@ -1,4 +1,3 @@
-let gameState = true;
 //Input and Output document Objects
 let pName = document.querySelector('.pName');
 let attemptLimit = document.querySelector('.pGuessLimit');
@@ -22,6 +21,11 @@ const acceptName = () => {
     console.log('acceptName ran')
 };
 nameSubmitter.addEventListener('click', acceptName);
+pName.addEventListener('keydown', guessEnter = (e) => {
+    if (e.keyCode === 13) {
+        acceptName();
+    }
+});
 //# of Guesses Accept Logic
 const acceptGuessLimit = () => {
     attemptLimit.disabled = true;
@@ -31,41 +35,43 @@ const acceptGuessLimit = () => {
     console.log('acceptGuessLimit ran');
 };
 guessLimitSubmitter.addEventListener('click',acceptGuessLimit);
+attemptLimit.addEventListener('keydown', guessEnter = (e) => {
+    if (e.keyCode === 13) {
+        acceptGuessLimit();
+    }
+});
 //Guess Accept and game Logic
 const acceptGuess = () => {
     console.log('acceptGuess was called')
-    do {
-        if (pGuess.value == num) {
-            responseField.textContent = `Congratulations! You found the number! Wanna try again ${pName.value}?  (try again by reloading the website!)`;
+    if (pGuess.value == num) {
+        responseField.textContent = `Congratulations! You found the number! Wanna try again ${pName.value}?  (try again by reloading the website!)`;
+        gameState = false;
+        pGuess.value = null;
+        console.log(attemptLimit.value);
+    } else if (pGuess.value > num) {
+        responseField.textContent = `${pGuess.value} is too big! Please enter a new value!`;
+        attemptLimit.value = attemptLimit.value - 1;
+        pGuess.value = null;
+        console.log(attemptLimit.value);
+        if (attemptLimit.value == 0) {
             gameState = false;
-            pGuess.value = null;
-            console.log(attemptLimit.value);
-            break;
-        } else if (pGuess.value > num) {
-            responseField.textContent = `${pGuess.value} is too big! Please enter a new value!`;
-            attemptLimit.value = attemptLimit.value - 1;
-            pGuess.value = null;
-            console.log(attemptLimit.value);
-            if (attemptLimit.value == 0) {
-                gameState = false;
-                responseField.textContent = `Oh no ${pName.value}! You ran out of Guesses! Want to try again? :'( (try again by reloading the website!)`;
-                console.log('Fail screen low ultimate ran');
-                break;
-            };
-            break;
-        } else if (pGuess.value < num) {
-            responseField.textContent = `${pGuess.value} is too small! Please enter a new value!`;
-            attemptLimit.value = attemptLimit.value - 1;
-            pGuess.value = null;
-            console.log(attemptLimit.value);
-            if (attemptLimit.value == 0) {
-                gameState = false;
-                responseField.textContent = `Oh no ${pName.value}! You ran out of Guesses! Want to try again? :'(  (try again by reloading the website!)`;
-                console.log('Fail screen low ultimate ran');
-                break;
-            };
-            break;
-        }
-    } while (gameOn === true)
-};
+            responseField.textContent = `Oh no ${pName.value}! You ran out of Guesses! Want to try again? :'( (try again by reloading the website!)`;
+            console.log('Fail screen low ultimate ran');
+        };
+    } else if (pGuess.value < num) {
+        responseField.textContent = `${pGuess.value} is too small! Please enter a new value!`;
+        attemptLimit.value = attemptLimit.value - 1;
+        pGuess.value = null;
+        console.log(attemptLimit.value);
+        if (attemptLimit.value == 0) {
+            gameState = false;
+            responseField.textContent = `Oh no ${pName.value}! You ran out of Guesses! Want to try again? :'(  (try again by reloading the website!)`;
+            console.log('Fail screen low ultimate ran');
+        };
+}};
 guessSubmitter.addEventListener('click', acceptGuess);
+pGuess.addEventListener('keydown', guessEnter = (e) => {
+    if (e.keyCode === 13) {
+        acceptGuess();
+    }
+});

@@ -12,7 +12,7 @@ const memeArr = ['https://media.makeameme.org/created/rng-rng-everywhere.jpg',
 const secretMeme = 'https://memegenerator.net/img/instances/23965785/bad-rng-bad-rng-everywhere.jpg';
 const secretMemePrograming = 'https://assets-global.website-files.com/5f3c19f18169b62a0d0bf387/60d33bf3a2121cc74f72a286_0AEnnZYBAYzmSXzyGaopjvEGKKO1yFqf_zMXqFTAT6vUDfXVPRifI3J8oBjZUl51PnRQqf2tqpjiRt33IKgg4sTiJi2YShGTN5iNUIoYbNj2HXobiQg4-k7yBiNT54EKOGYyZOR2.png';
 const RNGSelector = Math.floor(Math.random()*10);
-const secretRNG = Math.floor(Math.random()*10);
+const secretRNG = Math.floor(Math.random()*100);
 
 if (RNGSelector === 0 && secretRNG === 0) {
     memeShit.src = secretMeme;
